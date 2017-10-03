@@ -10,23 +10,13 @@ import java.util.stream.Collectors;
 public class BowlingGame{
     public static void main(String a[]){
         DataSourceFile dataSourceFile = new DataSourceFile();
-        dataSourceFile.readData(a[0].toString());
-
-        List<Bowler> list = new ArrayList<>();
+        List<Bowler> list = dataSourceFile.readData(a[0].toString());
         Map<String, List<Bowler>> result;
         result = list.stream().collect(Collectors.groupingBy(Bowler::getName));
         result.forEach((k, v) -> {
-            new Game(k, new ArrayList());
-
-
-            System.out.print(k + "=");
-            v.forEach(a->System.out.print(a.getPins() + ","));
-            System.out.println();
-        });
-
-
-        Game game = new Game();
-        game.play(result.readData(a[0].toString()));
-
+            new Game(k, v.stream()
+            		     .map(i->new Integer(i.getPins()))
+            		     .collect(Collectors.toList())).play();
+        });        
     }
 }
