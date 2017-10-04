@@ -15,22 +15,18 @@ import java.util.stream.Stream;
 public class DataSourceFile implements IDataSource{
 
     @Override
-    public List<Bowler> readData(Object source){
+    public List<Bowler> readData(Object source){    	
         List<Bowler> list = new ArrayList<>();
 
         try{
-            Stream<String> lines = Files.lines(Paths.get(source.toString()));
-
+            Stream<String> lines = Files.lines(Paths.get(source.toString()));            
             list = lines.map(a -> a.split(" "))
                     .map(array -> new Bowler(array[0],Integer.valueOf(array[1])))
                     .collect(Collectors.toList());
         }
         catch(IOException io){
             io.printStackTrace();
-        }
-
-
-
+        }        
         return list;
 
     }

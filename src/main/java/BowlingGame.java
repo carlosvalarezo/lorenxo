@@ -15,8 +15,8 @@ public class BowlingGame{
         result = list.stream().collect(Collectors.groupingBy(Bowler::getName));
         result.forEach((k, v) -> {
             new Game(k, v.stream()
-            		     .map(i->new Integer(i.getPins()))
-            		     .collect(Collectors.toList())).play();
-        });        
+                    .map(i->new Integer(i.getPins()))
+                    .collect(Collectors.toList())).play();
+        });
     }
 }
